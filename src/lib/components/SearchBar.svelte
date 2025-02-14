@@ -45,7 +45,7 @@
 
   input:focus {
     border-color: var(--input-focus-border-color);
-    box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.2); /* Sombra sutil ao focar */
+    box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.2);
   }
 
   button {
@@ -64,6 +64,6 @@
   }
 
   button:active {
-    background-color: #0d47a1; /* Azul mais escuro para o clique */
+    background-color: #0d47a1;
   }
 </style>

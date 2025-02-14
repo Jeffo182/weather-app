@@ -7,7 +7,6 @@ interface FetchWeatherParams {
 }
 
 export async function fetchWeather({ city, unit = 'metric' }: FetchWeatherParams) {
-  console.log('city', city);
 
   try {
     const response = await fetch(`${BASE_URL}?q=${city}&units=${unit}&appid=${API_KEY}`);

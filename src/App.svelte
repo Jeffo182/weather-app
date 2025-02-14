@@ -1,38 +1,60 @@
 <script>
   import { city, weatherData, unit } from './lib/stores/weatherStore'
-
   import SearchBar from './lib/components/SearchBar.svelte'
-  import WeatherCard from './lib/components/WeatherCard.svelte'
+  import Map from './lib/components/Map.svelte'
   import { fetchWeather } from './lib/api/fetchWeather'
 
-  // Atualiza os dados da previsão do tempo quando a cidade ou unidade muda
   $: {
     if ($city) {
-      // Só faz a requisição se $city tiver um valor válido
-      fetchWeather({ city: $city, unit: $unit }) // Passa um objeto com a propriedade `city`
+      fetchWeather({ city: $city, unit: $unit })
         .then((data) => {
           if (data.cod === 200) {
-            // Verifica se a requisição foi bem-sucedida
             weatherData.set(data)
           } else {
             console.error('Cidade não encontrada:', data.message)
-            weatherData.set(null) // Limpa os dados em caso de erro
+            weatherData.set(null)
           }
         })
         .catch((error) => {
           console.error('Erro ao buscar dados:', error)
-          weatherData.set(null) // Limpa os dados em caso de erro
+          weatherData.set(null)
         })
     }
   }
 </script>
 
 <main>
-  <h1>Previsão do Tempo</h1>
-  <SearchBar />
+  <div class="search-container">
+    <SearchBar />
+  </div>
   {#if $weatherData}
-    <WeatherCard data={$weatherData} />
+    <div class="map-container">
+      <Map coords={$weatherData.coord} weatherData={$weatherData} />
+    </div>
   {:else}
-    <p>Digite uma cidade para ver a previsão do tempo.</p>
+    <div class="map-container">
+      <Map />
+    </div>
   {/if}
 </main>
+
+<style>
+  .search-container {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    background-color: transparent;
+    padding: 10px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+
+  .map-container {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+  }
+</style>
