@@ -1,6 +1,8 @@
 # Svelte + TS + Vite
 
 [CLICK HERE TO TEST THE APP](https://weather-app-six-flame-12.vercel.app/)
+
+
 This template should help get you started developing with Svelte and TypeScript in Vite.
 
 ## Recommended IDE Setup
