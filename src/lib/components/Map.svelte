@@ -27,7 +27,16 @@
         map.removeLayer(marker)
       }
 
-      marker = L.marker([lat, lon]).addTo(map)
+      // Define o ícone personalizado
+      const customIcon = L.icon({
+        iconUrl: '/vite.svg', // Caminho para o ícone na pasta public
+        iconSize: [32, 32], // Tamanho do ícone
+        iconAnchor: [16, 32], // Ponto de ancoragem do ícone
+        popupAnchor: [0, -32], // Ponto de ancoragem do popup
+      })
+
+      // Adiciona o marcador com o ícone personalizado
+      marker = L.marker([lat, lon], { icon: customIcon }).addTo(map)
       map.setView([lat, lon], 13)
 
       if (weatherData) {
